@@ -53,7 +53,7 @@ RSpec.describe Cell do
   end
 
   describe '#render' do
-    it 'tells you if you what happens' do
+    it 'tells you what happens when fired upon' do
       cell_1 = Cell.new("B4")
       cell_1.render
       expect(cell_1.render).to eq('.')
