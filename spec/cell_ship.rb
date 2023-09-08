@@ -21,4 +21,15 @@ RSpec.describe Cell do
       expect(cell.empty?).to eq(true)
     end
   end
+  describe '#place_ship' do
+  it 'can place a ship in a cell' do
+    cell = Cell.new('B4')
+    cruiser = Ship.new("Cruiser", 3)
+    expect(cell.empty?).to eq(true)
+    expect(cell.ship).to eq('nil')
+    cell.place_ship(cruiser)
+    expect(cell.ship).to be_instance_of(Ship)
+    expect(cell.empty?).to eq(false)
+    end
+  end
 end
