@@ -14,7 +14,7 @@ RSpec.describe Cell do
     end
     it 'has a ship' do 
       cell = Cell.new('B4')
-      expect(cell.ship).to eq('nil')
+      expect(cell.ship).to eq(nil)
     end
     it 'is empty' do 
       cell = Cell.new('B4')
@@ -26,7 +26,7 @@ RSpec.describe Cell do
     cell = Cell.new('B4')
     cruiser = Ship.new("Cruiser", 3)
     expect(cell.empty?).to eq(true)
-    expect(cell.ship).to eq('nil')
+    expect(cell.ship).to eq(nil)
     cell.place_ship(cruiser)
     expect(cell.ship).to be_instance_of(Ship)
     expect(cell.empty?).to eq(false)
