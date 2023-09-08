@@ -1,48 +1,53 @@
 require './lib/ship'
-require 'pry'
 
-RSpec.describe Ship do
-  before :each do
-    @cruiser = Ship.new("Cruiser", 3)
+RSpec.describe 'Ship' do
+  describe '#initialize' do 
+    it 'exists' do 
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser).to be_instance_of(Ship)
+    end
+    
+    it 'has a name' do 
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.name).to eq('Cruiser')
+    end
+    
+    it 'has a length' do
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.length).to eq(3)
+    end
+    
+    it 'has health' do
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.health).to eq(3)
+    end
+    
+    it 'has not sunk' do
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.sunk?).to eq(false)
+    end
   end
   
-  describe '#initialize' do
-    it 'initialize' do
-      expect(@cruiser).to be_instance_of(Ship)
+  describe '#hit' do
+    it 'can take a hit' do 
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.health).to eq(3)
+      cruiser.hit
+      expect(cruiser.health).to eq(2)
     end
-
-    it 'has a name' do
-      expect(@cruiser.name).to eq('Cruiser')
-    end
-
-    it 'shows length' do
-      expect(@cruiser.length).to eq(3)
-    end
-  end
-
-  describe '#health' do
-    it 'shows health' do
-      expect(@cruiser.health).to eq(3)
-    end
-
-    it 'decrease when hit' do
-      @cruiser.hit
-      expect(@cruiser.health).to eq(2)
-      @cruiser.hit
-      expect(@cruiser.health).to eq(1)
-    end
-  end
-
-  describe '#sunk?' do
-    it 'is not sunk' do
-      expect(@cruiser.sunk?).to be false
-    end
-
-    it 'sunk after 3 hits' do
-      @cruiser.hit
-      @cruiser.hit
-      @cruiser.hit
-      expect(@cruiser.sunk?).to be true
+    
+    it 'can be sunk' do 
+      cruiser = Ship.new('Cruiser', 3)
+      expect(cruiser.health).to eq(3)
+      cruiser.hit
+      expect(cruiser.health).to eq(2)
+      expect(cruiser.sunk?).to eq(false)
+      cruiser.hit
+      expect(cruiser.health).to eq(1)
+      expect(cruiser.sunk?).to eq(false)
+      cruiser.hit
+      expect(cruiser.health).to eq(0)
+      expect(cruiser.sunk?).to eq(true)
     end
   end
 end
