@@ -12,5 +12,14 @@ class Board
     end
     cells
   end
+
+  def valid_coordinates?(coordinate)
+    if cells.include?(coordinate)
+      binding.pry
+      true
+    else
+      false
+    end
+  end
 end
 
