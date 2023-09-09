@@ -1,7 +1,7 @@
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
-require 'pry'
+
 
 RSpec.describe Board do 
   describe '#initialize' do
@@ -9,7 +9,7 @@ RSpec.describe Board do
       board = Board.new
       expect(board).to be_instance_of(Board)
     end
-    
+
     it 'board has cells' do
       board = Board.new
       expect(board.cells).to be_instance_of(Hash)

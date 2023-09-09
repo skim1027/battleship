@@ -58,5 +58,4 @@ class Board
       false
     end
   end
-end
 
