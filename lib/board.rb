@@ -29,15 +29,16 @@ class Board
       letters << separate.first
       numbers << separate.last.to_i
     end
-    
     if ship.length == coordinate.length 
       #first the ship needs to be the length as the coordinate
       if letters.all? { |letter| letter == letters[0] } && numbers == numbers.min..numbers.max
-
-
+      true
         #letters are the same && numbers consecutive
       elsif numbers.all? { |number| number == number[0] } && letters == letters.min..letters.max
-        #letters are consecutive && numbers are the same
+      true  
+      #letters are consecutive && numbers are the same
+    else
+      false
       end
     else
       false
