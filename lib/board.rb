@@ -6,8 +6,8 @@ class Board
 
   def cells
     @cells ||= begin
-      cells = {} 
-      keys = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
+    cells = {}
+    keys = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
       keys.each do |key|
         cells[key] = Cell.new(key)
       end
@@ -31,7 +31,6 @@ class Board
       letters << separate.first.ord
       numbers << separate.last.to_i
     end
-
     if ship.length == coordinate.length 
       if letters.all? { |letter| letter == letters[0] } 
         outputs = []
