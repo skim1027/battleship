@@ -5,12 +5,14 @@ class Board
   end
 
   def cells
+    @cells ||= begin
     cells = {}
     keys = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
-    keys.each do |key|
-      cells[key] = Cell.new(key)
+      keys.each do |key|
+        cells[key] = Cell.new(key)
+      end
+      cells
     end
-    cells
   end
 
   def valid_coordinates?(coordinate)
@@ -18,6 +20,17 @@ class Board
       true
     else
       false
+    end
+  end
+
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates) == true 
+      coordinates.map do |coordinate|
+        if valid_coordinates?(coordinate)
+          cells[coordinate].ship = ship
+          cells[coordinate].empty = false
+        end
+      end
     end
   end
 
@@ -29,7 +42,6 @@ class Board
       letters << separate.first.ord
       numbers << separate.last.to_i
     end
-
     if ship.length == coordinate.length 
       if letters.all? { |letter| letter == letters[0] } 
         outputs = []
