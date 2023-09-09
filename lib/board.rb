@@ -23,17 +23,6 @@ class Board
     end
   end
 
-  def place(ship, coordinates)
-    if valid_placement?(ship, coordinates) == true 
-      coordinates.map do |coordinate|
-        if valid_coordinates?(coordinate)
-          cells[coordinate].ship = ship
-          cells[coordinate].empty = false
-        end
-      end
-    end
-  end
-
   def valid_placement?(ship, coordinate)
     letters = []
     numbers = []
