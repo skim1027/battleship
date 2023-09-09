@@ -70,5 +70,18 @@ class Board
       false
     end
   end
-end
 
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates) == true 
+      coordinates.each do |coordinate|
+        if valid_coordinates?(coordinate)
+          if cells[coordinate].ship == nil && cells[coordinate].empty == true
+            cells[coordinate].ship = ship
+            cells[coordinate].empty = false
+          end
+          ship
+        end
+      end
+    end
+  end
+end
