@@ -32,13 +32,17 @@ class Cell
     @fired_upon = true
   end
 
-  def render(render = true)
-    empty? == false && render == true
+  def render(render = false)
+    if render == true && ship != nil
       'S'
-    if !@fired_upon
-      '.'
+    elsif @fired_upon && ship != nil && ship.sunk?
+      'X'
     elsif @fired_upon && ship == nil
-        'M'
+      'M'
+    elsif @fired_upon && ship != nil
+      'H'
+    else
+      '.'
     end
   end
 end
