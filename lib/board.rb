@@ -26,22 +26,36 @@ class Board
     numbers = []
     coordinate.each do |space|
       separate = space.split('')
-      letters << separate.first
+      letters << separate.first.ord
       numbers << separate.last.to_i
     end
+
     if ship.length == coordinate.length 
-      #first the ship needs to be the length as the coordinate
-      if letters.all? { |letter| letter == letters[0] } && numbers == numbers.min..numbers.max
-      true
-        #letters are the same && numbers consecutive
-      elsif numbers.all? { |number| number == number[0] } && letters == letters.min..letters.max
-      true  
-      #letters are consecutive && numbers are the same
-    else
-      false
+      if letters.all? { |letter| letter == letters[0] } 
+        outputs = []
+        numbers.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
+      elsif numbers.all? { |number| number == number[0] } 
+        outputs = []
+        letters.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
+      else
+        false
       end
     else
       false
     end
   end
-end
+
