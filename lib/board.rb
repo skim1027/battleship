@@ -15,8 +15,45 @@ class Board
 
   def valid_coordinates?(coordinate)
     if cells.include?(coordinate)
-      binding.pry
       true
+    else
+      false
+    end
+  end
+
+  def valid_placement?(ship, coordinate)
+    letters = []
+    numbers = []
+    coordinate.each do |space|
+      separate = space.split('')
+      letters << separate.first.ord
+      numbers << separate.last.to_i
+    end
+
+    if ship.length == coordinate.length 
+      if letters.all? { |letter| letter == letters[0] } 
+        outputs = []
+        numbers.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
+      elsif numbers.all? { |number| number == number[0] } 
+        outputs = []
+        letters.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
+      else
+        false
+      end
     else
       false
     end
