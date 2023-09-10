@@ -1,5 +1,6 @@
 class Board
   attr_reader :cells
+  attr_accessor :cells
   def initialize
     @cells = cells
   end
@@ -30,33 +31,36 @@ class Board
       separate = space.split('')
       letters << separate.first.ord
       numbers << separate.last.to_i
-    end
-    if ship.length == coordinate.length 
-      if letters.all? { |letter| letter == letters[0] } 
-        outputs = []
-        numbers.each_cons(2) do |first, second|
-          outputs.push(first + 1 == second)
-        end
-        if outputs.include?(false)
-          false
-        else
-          true
-        end
-      elsif numbers.all? { |number| number == number[0] } 
-        outputs = []
-        letters.each_cons(2) do |first, second|
-          outputs.push(first + 1 == second)
-        end
-        if outputs.include?(false)
-          false
-        else
-          true
-        end
-      else
-        false
+      if cells[space].ship != nil
+        return false
       end
-    else
+    end
+    if ship.length == coordinate.length
+      if letters.all? { |letter| letter == letters[0] } 
+      outputs = []
+      numbers.each_cons(2) do |first, second|
+        outputs.push(first + 1 == second)
+      end
+      if outputs.include?(false)
+        false
+      else
+        true
+      end
+    elsif numbers.all? { |number| number == number[0] } 
+    outputs = []
+    letters.each_cons(2) do |first, second|
+      outputs.push(first + 1 == second)
+    end
+    if outputs.include?(false)
       false
+    else
+      true
+    end
+  else
+    false
+  end
+else
+  false
     end
   end
 
@@ -67,6 +71,8 @@ class Board
           if cells[coordinate].ship == nil && cells[coordinate].empty == true
             cells[coordinate].ship = ship
             cells[coordinate].empty = false
+          else
+            false
           end
           ship
         end
