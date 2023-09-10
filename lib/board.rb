@@ -79,4 +79,37 @@ else
       end
     end
   end
+
+  def render(render = false)
+    board_info = cells.values
+    if render == true
+      full_board = [
+        [" ", "1", "2", "3", "4"].join(" "),
+        ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true) ].join(" "),
+        ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true) ].join(" "),
+        ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true) ].join(" "),
+        ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
+      ].join(" \n")  
+    else
+      full_board = [
+        [" ", "1", "2", "3", "4"].join(" "),
+        ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render ].join(" "),
+        ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render ].join(" "),
+        ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render ].join(" "),
+        ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
+      ].join(" \n")
+    end
+  end
+    
+  def fire(coordinate)
+    board_info = cells
+    if valid_coordinates?(coordinate) == true 
+      if board_info[coordinate].fired_upon == false
+        board_info[coordinate].fire_upon
+      end
+    end
+  end
 end
+
+
+
