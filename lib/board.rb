@@ -80,7 +80,6 @@ else
     end
   end
 
- 
   def render(render = false)
     board_info = cells.values
     if render == true
@@ -91,7 +90,6 @@ else
         ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true) ].join(" "),
         ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
       ].join(" \n")  
-      binding.pry
     else
       full_board = [
         [" ", "1", "2", "3", "4"].join(" "),
@@ -101,15 +99,27 @@ else
         ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
       ].join(" \n")
     end
-      
+  end
+    
+  def fire(coordinate)
+    board_info = cells
+    if valid_coordinates?(coordinate) == true 
+      if board_info[coordinate].fired_upon == false
+        board_info[coordinate].fired_upon = true
+        binding.pry
+        if board_info[coordinate].ship != nil && board_info[coordinate].ship.health == 0 
+          board_info[coordinate].ship.sunk = true
+        end
+      end
+    end
   end
 end
 
+# you can only fire if you have the valid coordinate
+# you can only fire if the cell hasn't been fired
+# fire == true
+# sunk when no health
 
 
-# 1. Have a grid to print out with all '.' values
-# 2. I'm assuming it will be similar pattern where if it's render(true), we can call render.cell.render so show "S" 
-# 3. if statements??? 
 
-# I've seen some examples where the cells had rows/column, and I am wondering if we need to update something on our cell?
 

@@ -123,15 +123,17 @@ RSpec.describe Board do
     it 'shows the if there has been a hit' do
       board = Board.new
       cruiser = Ship.new("Cruiser", 3)
+      submarine = Ship.new("Submarine", 2)
+      board.place(submarine, ["C1", "D1"])
       board.place(cruiser, ["A1", "A2", "A3"])
       board.fire('A1')
       expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
       board.fire('B4')
       expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
       board.fire('C1')
-      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC X . . . \nD . . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC H . . . \nD . . . . \n")
       board.fire('D1')
-      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD X . . . \n")
+      expect(board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC X . . . \nD X . . . \n")
       expect(board.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . M \nC X . . . \nD X . . . \n")
     end
   end
