@@ -105,21 +105,11 @@ else
     board_info = cells
     if valid_coordinates?(coordinate) == true 
       if board_info[coordinate].fired_upon == false
-        board_info[coordinate].fired_upon = true
-        binding.pry
-        if board_info[coordinate].ship != nil && board_info[coordinate].ship.health == 0 
-          board_info[coordinate].ship.sunk = true
-        end
+        board_info[coordinate].fire_upon
       end
     end
   end
 end
-
-# you can only fire if you have the valid coordinate
-# you can only fire if the cell hasn't been fired
-# fire == true
-# sunk when no health
-
 
 
 
