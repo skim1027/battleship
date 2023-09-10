@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 class Board
   attr_reader :cells
   attr_accessor :cells

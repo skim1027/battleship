@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 class Cell
   attr_reader :coordinate
   attr_accessor :ship, :empty, :fired_upon 
