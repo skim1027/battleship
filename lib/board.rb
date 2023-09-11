@@ -15,7 +15,7 @@ class Board
       cells
     end
   end
-
+  
   def valid_coordinates?(coordinate)
     if cells.include?(coordinate)
       true
@@ -31,6 +31,9 @@ class Board
       separate = space.split('')
       letters << separate.first.ord
       numbers << separate.last.to_i
+      if valid_coordinates?(space) == false
+        return false
+      end
       if cells[space].ship != nil
         return false
       end
@@ -77,6 +80,8 @@ else
           ship
         end
       end
+    # else
+    #   false
     end
   end
 
