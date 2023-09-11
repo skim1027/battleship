@@ -32,6 +32,9 @@ class Board
       separate = space.split('')
       letters << separate.first.ord
       numbers << separate.last.to_i
+      if valid_coordinates?(space) == false
+        return false
+      end
       if cells[space].ship != nil
         return false
       end
@@ -64,6 +67,9 @@ else
   false
     end
   end
+
+
+
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true 
