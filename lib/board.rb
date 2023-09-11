@@ -84,8 +84,6 @@ else
           ship
         end
       end
-    # else
-    #   false
     end
   end
 
