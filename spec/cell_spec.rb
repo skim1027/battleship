@@ -1,6 +1,3 @@
-# require './lib/ship'
-# require './lib/cell'
-# require 'pry'
 require './spec/spec_helper'
 
 RSpec.describe Cell do 
@@ -23,14 +20,14 @@ RSpec.describe Cell do
     end
   end
   describe '#place_ship' do
-  it 'can place a ship in a cell' do
-    cell = Cell.new('B4')
-    cruiser = Ship.new("Cruiser", 3)
-    expect(cell.empty?).to eq(true)
-    expect(cell.ship).to eq(nil)
-    cell.place_ship(cruiser)
-    expect(cell.ship).to be_instance_of(Ship)
-    expect(cell.empty?).to eq(false)
+    it 'can place a ship in a cell' do
+      cell = Cell.new('B4')
+      cruiser = Ship.new("Cruiser", 3)
+      expect(cell.empty?).to eq(true)
+      expect(cell.ship).to eq(nil)
+      cell.place_ship(cruiser)
+      expect(cell.ship).to be_instance_of(Ship)
+      expect(cell.empty?).to eq(false)
     end
   end
 
@@ -74,6 +71,5 @@ RSpec.describe Cell do
       expect(cruiser.sunk?).to eq(true)
       expect(cell_2.render).to eq('X')
     end
-
   end
 end

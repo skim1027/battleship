@@ -1,36 +1,40 @@
 require './spec/spec_helper'
 
-RSpec.describe Computer do
-  before :each do
-    # @computer = Computer.new
-    # @board = Board.new
-  end
-  
+RSpec.describe Computer do 
   describe '#initialize' do
-    it 'initialize' do
-     # expect(@computer).to be_instance_of(Computer)
+    it 'exists' do 
+      computer = Computer.new
+      expect(computer).to be_instance_of(Computer)
     end
   end
 
-  describe '#create_coordinate' do
-    it 'create coordinate for cruiser' do
+  describe '#place ships' do
+    it 'places cruiser on board' do 
+      computer = Computer.new
+      board = board.new
+      cruiser = Ship.new(cruiser, 3)
 
-    end
+    end 
+    it 'places submarine on board' do 
+      computer = Computer.new
+      board = board.new
+      submarine = Ship.new(submarine, 2)
 
-    it 'create coordinates for submarine' do
+    end 
+    it 'places both ships on board' do
+      computer = Computer.new
+      board = board.new
+      cruiser = Ship.new(cruiser, 3)
+      submarine = Ship.new(submarine, 2)
 
     end
   end
-
-  describe '#place_ship' do
-    it 'places ship in random' do
-      
-    end
-  end
-
-  describe '#take_turn' do
-    it 'choose a coordinate to fire on' do
+  describe '#takes a turn' do 
+    it "fire on a random cell" do 
 
     end
+
   end
+
 end
+

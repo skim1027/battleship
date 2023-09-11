@@ -9,7 +9,7 @@ response = gets.chomp
       response = gets.chomp.to_s
     elsif response == 'q'
       puts "goodbye"
-    break
+  break
     elsif response == 'p'
       player_board = Board.new
       computer_board = Board.new
@@ -22,23 +22,12 @@ response = gets.chomp
       puts "Enter the squares for the Cruiser (3 spaces)"
       answer_placement = gets.chomp.to_s
       change_answers = answer_placement.split(" ")  
-      
-      # while
-      #   if player_board.valid_placement?(cruiser, change_answers)
-      #     player_board.place(cruiser, change_answers)
-      #     puts player_board.render(true)
-      #   elsif
-      #     puts "try again"
-      #     answer_placement = gets.chomp.to_s
-      #     change_answers = answer_placement.split(" ")
-      #   end
-      # end
+
       while
       if !player_board.valid_placement?(cruiser, change_answers)
         puts "try again"
         answer_placement = gets.chomp.to_s
         change_answers = answer_placement.split(" ")
-
       else
         player_board.place(cruiser, change_answers)
         puts player_board.render(true)
