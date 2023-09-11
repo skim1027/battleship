@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 class Board
   attr_reader :cells
   attr_accessor :cells
@@ -67,6 +68,9 @@ else
     end
   end
 
+
+
+
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true 
       coordinates.each do |coordinate|
@@ -112,6 +116,29 @@ else
       if board_info[coordinate].fired_upon == false
         board_info[coordinate].fire_upon
       end
+    end
+  end
+
+  def render_reformat(render = false)
+    board_info = cells.values
+    if render == true
+      full_board = board_info
+      [
+        [" ", "1", "2", "3", "4", "\n"].join(" ") +
+        ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true), "\n" ].join(" ") + 
+        ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true), "\n" ].join(" ") + 
+        ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true), "\n" ].join(" ") + 
+        ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
+      ].join(" \n")
+    else
+      full_board = board_info
+      [
+        [" ", "1", "2", "3", "4", "\n"].join(" ") +
+        ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render, "\n"].join(" ") +
+        ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render, "\n" ].join(" ") + 
+        ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render, "\n" ].join(" ") +
+        ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
+      ].join(" \n")
     end
   end
 end

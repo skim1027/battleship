@@ -1,7 +1,7 @@
 require './spec/spec_helper'
-
-puts "Welcome to Battleship of Brendan and Sooyung"
-puts "If you want to play, press p, if not, hit q to quit"
+puts 'Welcome to BATTLESHIP'
+puts 'Enter p to play'
+puts 'Enter q to quit'
 response = gets.chomp
 
 if response == 'p'
@@ -11,36 +11,37 @@ if response == 'p'
   puts "I have laid out my ships on the grid."
   puts "You now need to lay out your two ships."
   puts "The Cruiser is three units long and the Submarine is two units long."
-  puts "Remember, you can't put diagonal spaces. Make sure the spaces are consecutive."
   puts board.render
   puts "Enter the squares for the Cruiser (3 spaces)"
 
   answer_placement = gets.chomp.to_s
   change_answers = answer_placement.split(" ")
-
-  coordinate_check = change_answers.each do |coordinate|
-    if board.valid_coordinates?(coordinate) == true
-      true
-    else
-      false
-    end
-  end
-  
-  loop do  
+while true
+  if board.valid_placement?(cruiser, change_answers) == true
+    board.place(cruiser, change_answers)
+    puts board.render(true)
+    break
+  else
     puts "try again"
-    new_response = gets.chomp
-    break if board.place(cruiser, change_answers)
-    puts board.render
+    answer_placement = gets.chomp.to_s
+    change_answers = answer_placement.split(" ")
   end
-
-  puts
-  puts "Enter the squares for the Submarine (2 spaces)"
-
-  second_placement = gets.chomp.to_s
-
-
-else
-  puts "goodbye"
 end
+  puts "Enter the squares for the Submarine (2 spaces)"
+  answer_placement = gets.chomp.to_s
+  change_answers = answer_placement.split(" ")
+  while true
+  if board.valid_placement?(submarine, change_answers) == true
+    board.place(submarine, change_answers)
+    puts board.render(true)
+    break
+  else
+    puts "try again"
+    answer_placement = gets.chomp.to_s
+    change_answers = answer_placement.split(" ")
+  end
+end
+  
 
 
+end

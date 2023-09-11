@@ -1,4 +1,5 @@
-require './lib/ship'
+# require './lib/ship'
+require './spec/spec_helper'
 
 RSpec.describe 'Ship' do
   describe '#initialize' do 
