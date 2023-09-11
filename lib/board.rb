@@ -41,35 +41,32 @@ class Board
     end
     if ship.length == coordinate.length
       if letters.all? { |letter| letter == letters[0] } 
-      outputs = []
-      numbers.each_cons(2) do |first, second|
-        outputs.push(first + 1 == second)
-      end
-      if outputs.include?(false)
-        false
+        outputs = []
+        numbers.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
+      elsif numbers.all? { |number| number == numbers[0] } 
+        outputs = []
+        letters.each_cons(2) do |first, second|
+          outputs.push(first + 1 == second)
+        end
+        if outputs.include?(false)
+          false
+        else
+          true
+        end
       else
-        true
+        false
       end
-    elsif numbers.all? { |number| number == number[0] } 
-    outputs = []
-    letters.each_cons(2) do |first, second|
-      outputs.push(first + 1 == second)
-    end
-    if outputs.include?(false)
-      false
     else
-      true
-    end
-  else
-    false
-  end
-else
-  false
+      false
     end
   end
-
-
-
 
   def place(ship, coordinates)
     if valid_placement?(ship, coordinates) == true 
