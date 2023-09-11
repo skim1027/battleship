@@ -1,3 +1,4 @@
+require './spec/spec_helper'
 class Ship
   attr_reader :name, :length
   attr_accessor :health, :sunk
@@ -20,3 +21,4 @@ class Ship
     @health -= 1
   end
 end
+
