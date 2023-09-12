@@ -128,18 +128,29 @@ class Play
       player_turn
       computer_turn
       display_board
-      report_score
     end
+    report_score
   end
 
   def report_score
     if @player_cruiser.health == 0 && @player_submarine.health == 0
-      puts "The computer won!"
+      puts "The computer won  ¯\_(✖╭╮✖)_/¯"
     elsif @computer_cruiser.health == 0 && @computer_submarine.health == 0
       puts "You won!"
+      game_won_art
     end
     puts "Game Over"
     start
+  end
+
+  def game_won_art
+    puts "┈┈┈┈┈┈▕▔╲┈┈┈┈┈┈"
+    puts "┈┈┈┈┈┈┈▏▕┈ⓈⓊⓅⒺⓇ"
+    puts "┈┈┈┈┈┈┈▏▕▂▂▂┈┈┈"
+    puts "▂▂▂▂▂▂╱┈▕▂▂▂▏┈┈"
+    puts "▉▉▉▉▉┈┈┈▕▂▂▂▏┈┈"
+    puts "▉▉▉▉▉┈┈┈▕▂▂▂▏┈┈"
+    puts "▔▔▔▔▔▔╲▂▕▂▂▂▏┈┈"
   end
 end
 
