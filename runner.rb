@@ -1,8 +1,7 @@
 require './spec/spec_helper'
+
 game = Play.new
 game.start
-
-
 
 # puts 'Welcome to BATTLESHIP'
 # puts 'Enter p to play'
@@ -29,12 +28,12 @@ game.start
 #       change_answers = answer_placement.split(" ")  
 
 #       while
-#       if !player_board.valid_placement?(ship, change_answers)
+#       if !player_board.valid_placement?(cruiser, change_answers)
 #         puts "try again"
 #         answer_placement = gets.chomp.to_s
 #         change_answers = answer_placement.split(" ")
 #       else
-#         player_board.place(ship, change_answers)
+#         player_board.place(cruiser, change_answers)
 #         puts player_board.render(true)
 #       end
 #     end
