@@ -15,9 +15,10 @@ class Play
       play_game
       place_cruiser
       place_submarine
-      computer_cruiser
-      computer_submarine
+      place_computer_cruiser
+      place_computer_submarine
       display_board
+      game_play
     elsif response == 'q'
       puts "Goodbye"
     else 
@@ -89,34 +90,60 @@ class Play
   def player_turn
     puts "Enter the coordinate for your shots:" 
     shot_placement = gets.chomp.to_s
-    if @computer_board.valid_coordinates?(shot_placement)
+    if @computer_board.valid_coordinates?(shot_placement) 
       @computer_board.fire(shot_placement)
+    # elsif @player_board.cells[shot_placement].fired_upon == true
+    #   puts "You've already shot on that spot" 
     else
       puts "try again"
-      turn
+      player_turn
+    end
+    if @computer_board.cells[shot_placement].render == "M"
+      puts "your shot on #{shot_placement} was a miss"
+    elsif @computer_board.cells[shot_placement].render == "H"
+      puts "your shot on #{shot_placement} was a hit"
+    elsif @computer_board.cells[shot_placement].render == "X"
+      puts "your shot on #{shot_placement} sunk the ship"
     end
   end
 
   def computer_turn
+    shot_placement = @computer_board.cells.keys.sample
     if @player_board.valid_coordinates?(shot_placement)
       @player_board.fire(shot_placement)
     else
       computer_turn
     end
+    if @player_board.cells[shot_placement].render == "M"
+      puts "the computer's shot on #{shot_placement} was a miss"
+    elsif @player_board.cells[shot_placement].render == "H"
+      puts "the computer's shot on #{shot_placement} was a hit"
+    elsif @player_board.cells[shot_placement].render == "X"
+      puts "the computer's shot on #{shot_placement} sunk the ship"
+    end
   end
 
-  # def game_play
-  #   until (@computer_cruiser.health == 0 && @computer_submarine.health == 0) || (@player_cruiser.health == 0 && @player_submarine.health == 0)
-  #     player_turn
-  #     computer_turn
-  #     display_board
-  #   end
-  #   # game_play
-  # end
+  def game_play
+    until (@computer_cruiser.health == 0 && @computer_submarine.health == 0) || (@player_cruiser.health == 0 && @player_submarine.health == 0)
+      player_turn
+      computer_turn
+      display_board
+      report_score
+    end
+  end
 
-
-
+  def report_score
+    if @player_cruiser.health == 0 && @player_submarine.health == 0
+      puts "The computer won!"
+    elsif @computer_cruiser.health == 0 && @computer_submarine.health == 0
+      puts "You won!"
+    end
+    puts "Game Over"
+    start
+  end
 end
+
+
 
 # if @computer_board.
 # until @computer_cruiser.health == 0 && @computer_submarine.health == 0
@@ -131,8 +158,8 @@ end
   method for play x
 
 2. set up
-  - computer
-  randomly select locations
+  - computer X 
+  randomly select locations x
 
   - user
   select cruiser x 
