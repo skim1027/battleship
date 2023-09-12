@@ -12,12 +12,15 @@ class Play
   def start
     welcome_message
     response = gets.chomp
-    if response == 'p'
+    if response == 'p' || 'P'
       play_game
       place_cruiser
       place_submarine
-      player_turn
-    elsif response == 'q'
+      place_computer_cruiser
+      place_computer_submarine
+      display_board
+      game_play
+    elsif response == 'q' || 'Q'
       puts "Goodbye"
     else 
       puts "invalid, try again"
@@ -64,17 +67,39 @@ class Play
     end
   end
 
-  def computer_cruiser
-
+  def place_computer_cruiser
+    if @computer_board.place(@computer_cruiser, @computer_board.cells.keys.sample(3))
+    else
+      place_computer_cruiser
+    end
   end
 
-  def computer_submarine
+  def place_computer_submarine
+    if @computer_board.place(@computer_submarine, @computer_board.cells.keys.sample(2))
+    else
+      place_computer_submarine
+    end
+  end
 
+  def computer_turn
+    shot_placement = @player_board.cells.keys.sample
+    if @player_board.valid_coordinates?(shot_placement)
+      @player_board.fire(shot_placement)
+    else
+      computer_turn
+    end
+    if @player_board.cells[shot_placement].render == "M"
+      puts "the computer's shot on #{shot_placement} was a miss"
+    elsif @player_board.cells[shot_placement].render == "H"
+      puts "the computer's shot on #{shot_placement} hit your ship"
+    elsif @player_board.cells[shot_placement].render == "X"
+      puts "the computer's shot on #{shot_placement} sunk your ship"
+    end
   end
 
   def display_board
     puts "=============COMPUTER BOARD============="
-    
+    puts @computer_board.render(true)
     puts "===============PLAYER BOARD============="
     puts @player_board.render(true)
   end
@@ -86,9 +111,27 @@ class Play
       @computer_board.fire(shot_placement)
     else
       puts "try again"
-      turn
+      player_turn
+    end
+    if @computer_board.cells[shot_placement].render == "M"
+      puts "Your shot on #{shot_placement} was a miss"
+    elsif @computer_board.cells[shot_placement].render == "H"
+      puts "Your shot on #{shot_placement} hit THEIR ship"
+    elsif @computer_board.cells[shot_placement].render == "X"
+      puts "Your shot on #{shot_placement} sunk their ship"
     end
   end
+
+  def game_play
+    until (@computer_cruiser.health == 0 && @computer_submarine.health == 0) || (@player_cruiser.health == 0 && @player_submarine.health == 0)
+      player_turn
+      computer_turn
+      display_board
+    end
+    puts "Game Over"
+    start
+  end
+
 
 
 

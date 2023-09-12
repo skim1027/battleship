@@ -16,9 +16,10 @@ class Board
       cells
     end
   end
+
   
   def valid_coordinates?(coordinate)
-    if cells.include?(coordinate)
+    if cells.include?(coordinate) #&& cells[coordinate].fired_upon == false
       true
     else
       false
