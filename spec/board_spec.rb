@@ -19,6 +19,14 @@ RSpec.describe Board do
     end
   end
 
+  describe "#make_keys" do
+    it 'works' do
+    board = Board.new
+    board.make_keys(4)
+    expect(board.make_keys.keys).to be_instance_of(Array)
+    end
+  end
+
   describe '#valid_coordinates?' do
     it 'shows if coordinate is valid or not' do
       board = Board.new

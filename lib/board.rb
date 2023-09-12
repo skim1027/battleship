@@ -6,6 +6,22 @@ class Board
     @cells = cells
   end
 
+  def make_keys(player_input)
+    keys = []
+    width = 1..player_input
+    height = "A"..((player_input + 64).chr)
+    rows = width.to_a
+    columns = height.to_a
+    columns.each do |letter|
+      rows.each do |number|
+        keys << "#{letter}#{number}"
+      end
+    end
+  end
+
+
+
+
   def cells
     @cells ||= begin
     cells = {}
