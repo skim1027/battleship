@@ -1,12 +1,13 @@
 require './spec/spec_helper'
 class Board
-  attr_reader :cells
-  attr_accessor :cells
+
+  attr_accessor :cells, :number_cells
   def initialize
     @cells = cells
+    @number_cells = number_cells
   end
 
-  def make_keys(player_input)
+  def make_keys(player_input = 4)
     keys = []
     width = 1..player_input
     height = "A"..((player_input + 64).chr)
@@ -23,11 +24,13 @@ class Board
   def cells
     @cells ||= begin
     cells = {}
-    keys = make_keys(4)
+    keys = make_keys
     keys.each do |key|
       cells[key] = Cell.new(key)
     end
+    @number_cells = cells.count
     cells
+    require 'pry'; binding.pry
   end
   end
 
