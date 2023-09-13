@@ -113,10 +113,33 @@ RSpec.describe Board do
       @board.place(@cruiser, ["A1", "A2", "A3"])
       @board.fire('A1')
       expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+      it 'shows there have been two hits' do
+        @board.place(@cruiser, ["A1", "A2", "A3"])
+        @board.place(@submarine, ["C1", "D1"])
+        @board.fire('B4')
+        @board.fire('A1')
+        expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
+      end
+      
+      it 'shows there have been three hits' do
+        @board.place(@submarine, ["C1", "D1"])
+        @board.place(@cruiser, ["A1", "A2", "A3"])
+        @board.fire('A1')
+        @board.fire('B4')
+        expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
+        @board.fire('C1')
+        expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC H . . . \nD . . . . \n")
+      end
+
+      it 'shows there have been 4 hits' do
+      @board.place(@submarine, ["C1", "D1"])
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      @board.fire('A1')
       @board.fire('B4')
-      expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC . . . . \nD . . . . \n")
+      expect(@board.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . M \nC S . . . \nD S . . . \n")
       @board.fire('C1')
-      expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC H . . . \nD . . . . \n")
       @board.fire('D1')
       expect(@board.render).to eq("  1 2 3 4 \nA H . . . \nB . . . M \nC X . . . \nD X . . . \n")
       expect(@board.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . M \nC X . . . \nD X . . . \n")
