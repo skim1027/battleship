@@ -2,14 +2,13 @@ require './spec/spec_helper'
 class Board
 
   attr_accessor :cells, :number_cells, :rows, :columns, :number_array
- 
+
   def initialize
     @cells = cells
     @number_cells = number_cells
     @number_array = number_array
     @rows = rows
     @columns = columns
-
   end
 
   def make_keys(player_input = 4)
@@ -38,8 +37,7 @@ class Board
       cells
     # require 'pry'; binding.pry
     end
-    end
-
+  end
   
   def valid_coordinates?(coordinate)
     if cells.include?(coordinate)
