@@ -35,7 +35,7 @@ class Board
 
   
   def valid_coordinates?(coordinate)
-    if cells.include?(coordinate) && cells[coordinate].fired_upon == false
+    if cells.include?(coordinate)
       true
     else
       false
