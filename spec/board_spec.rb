@@ -23,6 +23,7 @@ RSpec.describe Board do
     end
   end
 
+
   describe '#valid_coordinates?' do
     it 'shows if coordinate is valid or not' do
       expect(@board.valid_coordinates?('A1')).to be true

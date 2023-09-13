@@ -1,20 +1,37 @@
 require './spec/spec_helper'
 class Board
-  attr_reader :cells
-  attr_accessor :cells
+
+  attr_accessor :cells, :number_cells
   def initialize
     @cells = cells
+    @number_cells = number_cells
+  end
+
+  def make_keys(player_input = 4)
+    keys = []
+    width = 1..player_input
+    height = "A"..((player_input + 64).chr)
+    rows = width.to_a
+    columns = height.to_a
+    columns.each do |letter|
+      rows.each do |number|
+        keys << "#{letter}#{number}"
+      end
+    end
+    keys
   end
 
   def cells
     @cells ||= begin
     cells = {}
-    keys = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4', 'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
-      keys.each do |key|
-        cells[key] = Cell.new(key)
-      end
-      cells
+    keys = make_keys
+    keys.each do |key|
+      cells[key] = Cell.new(key)
     end
+    @number_cells = cells.count
+    cells
+    require 'pry'; binding.pry
+  end
   end
 
   
@@ -115,28 +132,28 @@ class Board
     end
   end
 
-  def render_reformat(render = false)
-    board_info = cells.values
-    if render == true
-      full_board = board_info
-      [
-        [" ", "1", "2", "3", "4", "\n"].join(" ") +
-        ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true), "\n" ].join(" ") + 
-        ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true), "\n" ].join(" ") + 
-        ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true), "\n" ].join(" ") + 
-        ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
-      ].join(" \n")
-    else
-      full_board = board_info
-      [
-        [" ", "1", "2", "3", "4", "\n"].join(" ") +
-        ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render, "\n"].join(" ") +
-        ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render, "\n" ].join(" ") + 
-        ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render, "\n" ].join(" ") +
-        ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
-      ].join(" \n")
-    end
-  end
+  # def render_reformat(render = false)
+  #   board_info = cells.values
+  #   if render == true
+  #     full_board = board_info
+  #     [
+  #       [" ", "1", "2", "3", "4", "\n"].join(" ") +
+  #       ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true), "\n" ].join(" ") + 
+  #       ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true), "\n" ].join(" ") + 
+  #       ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true), "\n" ].join(" ") + 
+  #       ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
+  #     ].join(" \n")
+  #   else
+  #     full_board = board_info
+  #     [
+  #       [" ", "1", "2", "3", "4", "\n"].join(" ") +
+  #       ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render, "\n"].join(" ") +
+  #       ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render, "\n" ].join(" ") + 
+  #       ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render, "\n" ].join(" ") +
+  #       ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
+  #     ].join(" \n")
+  #   end
+  # end
 end
 
 

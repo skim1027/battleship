@@ -45,6 +45,7 @@ class Play
     puts "Enter the squares for the Cruiser (3 spaces)"
     answer_placement = gets.chomp.to_s
     change_answers = answer_placement.split(" ") 
+    
     if @player_board.place(@player_cruiser, change_answers)
       puts @player_board.render(true)
     else
@@ -57,6 +58,7 @@ class Play
     puts "Enter the squares for the Submarine (2 spaces)"
     answer_placement = gets.chomp.to_s
     change_answers = answer_placement.split(" ")
+    
     if @player_board.place(@player_submarine, change_answers)
       puts @player_board.render(true)
     else
