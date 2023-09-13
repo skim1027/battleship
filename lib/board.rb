@@ -1,18 +1,23 @@
 require './spec/spec_helper'
 class Board
 
-  attr_accessor :cells, :number_cells
+  attr_accessor :cells, :number_cells, :rows, :columns, :number_array
+ 
   def initialize
     @cells = cells
     @number_cells = number_cells
+    @number_array = number_array
+    @rows = rows
+    @columns = columns
+
   end
 
   def make_keys(player_input = 4)
     keys = []
     width = 1..player_input
     height = "A"..((player_input + 64).chr)
-    rows = width.to_a
-    columns = height.to_a
+    @rows = width.to_a
+    @columns = height.to_a
     columns.each do |letter|
       rows.each do |number|
         keys << "#{letter}#{number}"
@@ -29,10 +34,11 @@ class Board
       cells[key] = Cell.new(key)
     end
     @number_cells = cells.count
-    cells
-    require 'pry'; binding.pry
-  end
-  end
+    @number_array = (1..cells.count).to_a
+      cells
+    # require 'pry'; binding.pry
+    end
+    end
 
   
   def valid_coordinates?(coordinate)
@@ -105,21 +111,23 @@ class Board
   def render(render = false)
     board_info = cells.values
     if render == true
-      full_board = [
-        [" ", "1", "2", "3", "4"].join(" "),
-        ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true) ].join(" "),
-        ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true) ].join(" "),
-        ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true) ].join(" "),
-        ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
-      ].join(" \n")  
+      cell_render = @number_array.map { |x| board_info[x-1].render(true) }
+      cell_render_arrays = cell_render.each_slice(@rows.count).to_a
+      left = @columns.dup
+      render_with_letter = cell_render_arrays.map do |array|
+        array.insert(0, left.shift).push("\n").join(" ")
+      end
+      first_row = (@rows.map { |num| num.to_s }).unshift(' ').push("\n").join(" ")
+      full_board = render_with_letter.unshift(first_row).flatten.join("")
     else
-      full_board = [
-        [" ", "1", "2", "3", "4"].join(" "),
-        ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render ].join(" "),
-        ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render ].join(" "),
-        ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render ].join(" "),
-        ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
-      ].join(" \n")
+      cell_render = @number_array.map { |x| board_info[x-1].render }
+      cell_render_arrays = cell_render.each_slice(@rows.count).to_a
+      left = @columns.dup
+      render_with_letter = cell_render_arrays.map do |array|
+        array.insert(0, left.shift).push("\n").join(" ")
+      end
+      first_row = (@rows.map { |num| num.to_s }).unshift(' ').push("\n").join(" ")
+      full_board = render_with_letter.unshift(first_row).flatten.join("")
     end
   end
     
@@ -132,28 +140,6 @@ class Board
     end
   end
 
-  # def render_reformat(render = false)
-  #   board_info = cells.values
-  #   if render == true
-  #     full_board = board_info
-  #     [
-  #       [" ", "1", "2", "3", "4", "\n"].join(" ") +
-  #       ["A", board_info[0].render(true), board_info[1].render(true), board_info[2].render(true), board_info[3].render(true), "\n" ].join(" ") + 
-  #       ["B", board_info[4].render(true), board_info[5].render(true), board_info[6].render(true), board_info[7].render(true), "\n" ].join(" ") + 
-  #       ["C", board_info[8].render(true), board_info[9].render(true), board_info[10].render(true), board_info[11].render(true), "\n" ].join(" ") + 
-  #       ["D", board_info[12].render(true), board_info[13].render(true), board_info[14].render(true), board_info[15].render(true), "\n" ].join(" ")
-  #     ].join(" \n")
-  #   else
-  #     full_board = board_info
-  #     [
-  #       [" ", "1", "2", "3", "4", "\n"].join(" ") +
-  #       ["A", board_info[0].render, board_info[1].render, board_info[2].render, board_info[3].render, "\n"].join(" ") +
-  #       ["B", board_info[4].render, board_info[5].render, board_info[6].render, board_info[7].render, "\n" ].join(" ") + 
-  #       ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render, "\n" ].join(" ") +
-  #       ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
-  #     ].join(" \n")
-  #   end
-  # end
 end
 
 
