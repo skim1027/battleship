@@ -1,7 +1,3 @@
-# require './lib/board'
-# require './lib/cell'
-# require './lib/ship'
-# require 'pry'
 require './spec/spec_helper'
 
 RSpec.describe Board do 
