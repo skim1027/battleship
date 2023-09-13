@@ -10,25 +10,27 @@ class Play
 
   def start
     welcome_message
-    response = gets.chomp
-    if response == 'test'
-      puts "Test game"
-      test_place_ships
-      place_computer_cruiser
-      place_computer_submarine
-      display_board_test
-      test_game_play
-    elsif response == 'p' || 'P'
-      play_game
-      place_cruiser
-      place_submarine
-      sleep(3)
-      place_computer_cruiser
-      place_computer_submarine
-      display_board
-      game_play
-    elsif response == 'q' || 'Q'
-      puts "Goodbye"
+    response = gets.chomp.upcase
+    if response == 'TEST' || 'P' || 'Q'
+      if response == 'TEST'
+        puts "Test game"
+        test_place_ships
+        place_computer_cruiser
+        place_computer_submarine
+        display_board_test
+        test_game_play
+      elsif response == 'P'
+        play_game
+        place_cruiser
+        place_submarine
+        sleep(2)
+        place_computer_cruiser
+        place_computer_submarine
+        display_board
+        game_play
+      elsif response == 'Q'
+        puts "Goodbye"
+      end
     else 
       puts "Invalid entry, try again"
       start
