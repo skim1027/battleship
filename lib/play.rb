@@ -46,7 +46,6 @@ class Play
   def place_cruiser
     puts "Enter the squares for the Cruiser (3 spaces)"
     answer_placement = gets.chomp.upcase
-    require 'pry'; binding.pry
     change_answers = answer_placement.split(" ") 
     if @player_board.place(@player_cruiser, change_answers)
       puts @player_board.render(true)
