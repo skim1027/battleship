@@ -22,6 +22,7 @@ class Play
       play_game
       place_cruiser
       place_submarine
+      sleep(3)
       place_computer_cruiser
       place_computer_submarine
       display_board
@@ -180,11 +181,15 @@ class Play
   def game_play
     until (@computer_cruiser.health == 0 && @computer_submarine.health == 0) || (@player_cruiser.health == 0 && @player_submarine.health == 0)
       player_turn
+      sleep(1)
       computer_turn
+      sleep(1)
       display_board
+      sleep(1)
     end
     report_score
     board_reset
+    sleep(3)
     start
   end
 
@@ -196,6 +201,7 @@ class Play
     end
     report_score
     board_reset
+    sleep(3)
     start
   end
 
