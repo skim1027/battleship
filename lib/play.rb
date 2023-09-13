@@ -83,7 +83,7 @@ class Play
       place_computer_submarine
     end
   end
-   
+  
   def play_game
     puts "I have laid out my ships on the grid."
     puts "You now need to lay out your two ships."
@@ -216,13 +216,11 @@ class Play
       cell.last.empty = true
       cell.last.fired_upon = false
     end
-
     @computer_board.cells.each do |cell|
       cell.last.ship = nil
       cell.last.empty = true
       cell.last.fired_upon = false
     end
-
     @player_cruiser = Ship.new("Cruiser", 3)
     @computer_cruiser = Ship.new("Cruiser", 3)
     @player_submarine = Ship.new("Submarine", 2)
