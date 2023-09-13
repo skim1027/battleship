@@ -10,7 +10,7 @@ class Play
 
   def start
     welcome_message
-    response = gets.chomp.upcase
+    response = gets.chomp.upcase.strip
     if response == 'TEST'
       puts "Test game"
       test_place_ships
@@ -18,8 +18,7 @@ class Play
       place_computer_submarine
       display_board_test
       test_game_play
-    end
-    if response == 'P'
+    elsif response == 'P'
       play_game
       place_cruiser
       place_submarine
@@ -46,9 +45,9 @@ class Play
 
   def place_cruiser
     puts "Enter the squares for the Cruiser (3 spaces)"
-    answer_placement = gets.chomp.to_s
+    answer_placement = gets.chomp.upcase
+    require 'pry'; binding.pry
     change_answers = answer_placement.split(" ") 
-    
     if @player_board.place(@player_cruiser, change_answers)
       puts @player_board.render(true)
     else
@@ -59,9 +58,8 @@ class Play
 
   def place_submarine
     puts "Enter the squares for the Submarine (2 spaces)"
-    answer_placement = gets.chomp.to_s
+    answer_placement = gets.chomp.upcase
     change_answers = answer_placement.split(" ")
-    
     if @player_board.place(@player_submarine, change_answers)
       puts @player_board.render(true)
     else
@@ -93,7 +91,7 @@ class Play
   
   def player_turn
     puts "Enter the coordinate for your shots:" 
-    shot_placement = gets.chomp.to_s
+    shot_placement = gets.chomp.upcase.strip
     if @computer_board.valid_coordinates?(shot_placement) && @computer_board.cells[shot_placement].fired_upon == true
       puts "You already fired on this coordinate"
       player_turn
