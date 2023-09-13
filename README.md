@@ -1,1 +1,10 @@
 # battleship
+
+1. Iteration 3 did not provide an interaction pattern. How did you approach designing this iteration? If you did not get to Iteration 3, reflect on how you think you would’ve approached the design and problem solving process.
+  - At first, we tried to approach it in too broad of a way. However, once we started breaking everything down into smaller chunks, it got much easier. We spent a fair amount of time thinking about the functionality of the game. We had a very productive visit with Cydnee in her office hours discussing how to build the play class and make it functional. 
+2. If you had one more day to work on this project, what would you work on?
+  - I think it would be really fun to try the intelligent computer. I have an idea of how to do it but we ran out of time. I do think we could make the board sizes change relatively easily now.
+3. Describe the pairing techniques you used while working on this project.
+  - Initially, for the first class, we both worked on the class separately, then went through the mer conflict.  Then for the rest of the iteration 1, we utilized the ping/pong method, where one person wrote the test, and the other person wrote the class method to pass the test. For the rest of the project, we utilized a driver/navigator -ish style. We both frequently made the pull request, so we both had the most up to date version of the file, and when issues occurred while we are writing the class method, we both tried to come up with solutions, as we both had the up to date version of the files. 
+4. Describe how feedback was shared over the course of this project.
+  - We were pairing a lot so we shared feedback verbally.  We both had verbal as preferred method of communication and since we had similar availability, it worked out great. As we were pairing, it was easy to bounce off ideas and figure out any issues with the code together and getting things completed on timely manner.
