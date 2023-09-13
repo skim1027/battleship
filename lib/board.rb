@@ -1,18 +1,22 @@
 require './spec/spec_helper'
 class Board
 
-  attr_accessor :cells, :number_cells
+  attr_accessor :cells, :number_cells, :rows, :columns, :number_array
+ 
   def initialize
     @cells = cells
     @number_cells = number_cells
+    @number_array = number_array
+    @rows = rows
+    @columns = columns
   end
 
   def make_keys(player_input = 4)
     keys = []
     width = 1..player_input
     height = "A"..((player_input + 64).chr)
-    rows = width.to_a
-    columns = height.to_a
+    @rows = width.to_a
+    @columns = height.to_a
     columns.each do |letter|
       rows.each do |number|
         keys << "#{letter}#{number}"
@@ -29,11 +33,11 @@ class Board
       cells[key] = Cell.new(key)
     end
     @number_cells = cells.count
+    @number_array = (1..cells.count).to_a
+    
     cells
-    require 'pry'; binding.pry
+    end
   end
-  end
-
   
   def valid_coordinates?(coordinate)
     if cells.include?(coordinate)
@@ -42,7 +46,7 @@ class Board
       false
     end
   end
-
+  
   def valid_placement?(ship, coordinate)
     letters = []
     numbers = []
@@ -120,6 +124,16 @@ class Board
         ["C", board_info[8].render, board_info[9].render, board_info[10].render, board_info[11].render ].join(" "),
         ["D", board_info[12].render, board_info[13].render, board_info[14].render, board_info[15].render, "\n" ].join(" ")
       ].join(" \n")
+    require 'pry'; binding.pry
+# test = @number_array.map { |x| board_info[x-1].render }
+# new_array = test.each_slice(@rows.count).to_a
+# array_rows = new_array.map do |array|
+# array.insert(0, @columns.shift).push("\n")
+# end
+# first_row = (@rows.map { |num| num.to_s }).unshift(' ').push("\n")
+# all = array_rows.unshift(first_row).flatten.join(" ")
+
+
     end
   end
     
